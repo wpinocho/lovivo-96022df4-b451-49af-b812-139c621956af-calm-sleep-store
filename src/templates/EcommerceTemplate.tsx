@@ -5,17 +5,9 @@ import { SocialLinks } from '@/components/SocialLinks'
 import { FloatingCart } from '@/components/FloatingCart'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, Moon } from 'lucide-react'
 import { useCartUI } from '@/components/CartProvider'
 import { useCart } from '@/contexts/CartContext'
-import { Input } from '@/components/ui/input'
-
-/**
- * EDITABLE TEMPLATE - EcommerceTemplate
- * 
- * Template específico para páginas de ecommerce con header, footer y cart.
- * El agente IA puede modificar completamente el diseño, colores, layout.
- */
 
 interface EcommerceTemplateProps {
   children: ReactNode
@@ -41,13 +33,16 @@ export const EcommerceTemplate = ({
   const totalItems = getTotalItems()
 
   const header = (
-    <div className={`py-4 ${headerClassName}`}>
+    <div className={`py-4 bg-white border-b border-border ${headerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/">
-              <BrandLogoLeft />
+            <Link to="/" className="flex items-center gap-2">
+              <div className="bg-primary rounded-lg p-2">
+                <Moon className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold text-foreground">SleepWell</span>
             </Link>
           </div>
 
@@ -56,15 +51,15 @@ export const EcommerceTemplate = ({
             <nav className="flex space-x-6">
               <Link 
                 to="/" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-foreground/70 hover:text-primary transition-colors font-medium"
               >
                 Home
               </Link>
               <Link 
                 to="/blog" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-foreground/70 hover:text-primary transition-colors font-medium"
               >
-                Blog
+                Sleep Guide
               </Link>
             </nav>
           </div>
@@ -75,11 +70,11 @@ export const EcommerceTemplate = ({
               variant="ghost"
               size="icon"
               onClick={openCart}
-              className="relative"
+              className="relative hover:bg-secondary"
             >
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-5 w-5 text-foreground" />
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg">
                   {totalItems > 99 ? '99+' : totalItems}
                 </span>
               )}
@@ -100,20 +95,25 @@ export const EcommerceTemplate = ({
   )
 
   const footer = (
-    <div className={`bg-black text-white py-12 ${footerClassName}`}>
+    <div className={`bg-foreground text-white py-12 ${footerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <BrandLogoLeft />
-            <p className="mt-4 text-white/70">
-              Your trusted online store
+            <div className="flex items-center gap-2 mb-4">
+              <div className="bg-primary rounded-lg p-2">
+                <Moon className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold">SleepWell</span>
+            </div>
+            <p className="text-white/70">
+              Premium sleep products for better rest and recovery. Transform your nights, transform your life.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Links</h3>
+            <h3 className="font-semibold mb-4 text-white">Quick Links</h3>
             <div className="space-y-2">
               <Link 
                 to="/" 
@@ -125,8 +125,20 @@ export const EcommerceTemplate = ({
                 to="/blog" 
                 className="block text-white/70 hover:text-white transition-colors"
               >
-                Blog
+                Sleep Guide
               </Link>
+              <a 
+                href="#" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                About Us
+              </a>
+              <a 
+                href="#" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                Contact
+              </a>
             </div>
           </div>
 
@@ -134,11 +146,14 @@ export const EcommerceTemplate = ({
           <div>
             <h3 className="font-semibold mb-4 text-white">Follow Us</h3>
             <SocialLinks />
+            <p className="text-white/70 text-sm mt-4">
+              Join our community for sleep tips and exclusive offers.
+            </p>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-white/20 text-center text-white/70">
-          <p>&copy; 2024 Your Store. All rights reserved.</p>
+          <p>&copy; 2024 SleepWell. All rights reserved. Sweet dreams guaranteed.</p>
         </div>
       </div>
     </div>
